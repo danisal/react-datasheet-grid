@@ -1,9 +1,19 @@
 language: node_js
 node_js:
   - '14'
+addons:
+  apt:
+    packages:
+      - libgconf-2-4
+cache:
+  # cache both npm modules and Cypress binary
+  directories:
+    - ~/.npm
+    - ~/.cache
 branches:
   only:
     - master
 script:
   - npm test -- --coverage
+  - npm run cypress:run
   - npm run report-coverage
